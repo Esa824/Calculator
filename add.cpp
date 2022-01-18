@@ -250,8 +250,10 @@ void add(const char *number1, const char *number2, char *answer) {
         fer += *l;
         l--;
       }
+      if(found_two == 0){
       if (m >= counter) {
         fer -= 48;
+      }
       }
       if (m < counter) {
         fer -= 96;
@@ -266,7 +268,7 @@ void add(const char *number1, const char *number2, char *answer) {
       caries = fere;
       if (caries > 0 && i == counts - 1) {
         found_two = 1;
-        counter++;
+        counts++;
       }
     }
     char *u = answer;
@@ -285,7 +287,11 @@ void add(const char *number1, const char *number2, char *answer) {
       d++;
       counter++;
     }
-    for (int i = 0; i < counts - 1; i++) {
+    counts --;
+    for (int i = 0; i < counts; i++) {
+      if(i == counts - 1&& *f == *l){
+        break;
+      }
       m++;
       int fer = *f;
       if (m < counter) {
@@ -353,6 +359,9 @@ void add(const char *number1, const char *number2, char *answer) {
       counter++;
     }
     for (int i = 0; i < counter; i++) {
+      if(i == counter - 1&& *f == *l){
+        break;
+      }
       m++;
       int fer = *l;
       if (m < counts - 1) {
@@ -416,7 +425,11 @@ void add(const char *number1, const char *number2, char *answer) {
       d++;
       counter++;
     }
-    for (int i = 0; i < counter - 1; i++) {
+    counter--;
+    for (int i = 0; i < counter; i++) {
+      if(i == counter - 1&& *f == *l){
+        break;
+      }
       m++;
       int fer = *l;
       if (m < counts) {
@@ -482,6 +495,9 @@ void add(const char *number1, const char *number2, char *answer) {
       counter++;
     }
     for (int i = 0; i < counts; i++) {
+      if(i == counts - 1&& *f == *l){
+        break;
+      }
       m++;
       int fer = *f;
       if (m < counter - 1) {
