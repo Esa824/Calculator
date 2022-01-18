@@ -1,8 +1,8 @@
+#include "compare.h"
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <string>
-#include "compare.h"
 using namespace std;
 // -1 if number1 is less than number2 1 if number1
 // greater number2
@@ -191,18 +191,18 @@ void add(const char *number1, const char *number2, char *answer) {
     for (int i = 0; i < counter; i++) {
       m++;
       int fer = 0;
-      if(found_two == 0){
-      fer = *l;
+      if (found_two == 0) {
+        fer = *l;
       }
       fer += caries;
       if (m < counts) {
         fer += *f;
         f--;
       }
-      if(found_two == 0){
-      if (m >= counts) {
-        fer -= 48;
-      }
+      if (found_two == 0) {
+        if (m >= counts) {
+          fer -= 48;
+        }
       }
       if (m < counts) {
         fer -= 96;
@@ -250,10 +250,10 @@ void add(const char *number1, const char *number2, char *answer) {
         fer += *l;
         l--;
       }
-      if(found_two == 0){
-      if (m >= counter) {
-        fer -= 48;
-      }
+      if (found_two == 0) {
+        if (m >= counter) {
+          fer -= 48;
+        }
       }
       if (m < counter) {
         fer -= 96;
@@ -287,9 +287,9 @@ void add(const char *number1, const char *number2, char *answer) {
       d++;
       counter++;
     }
-    counts --;
+    counts--;
     for (int i = 0; i < counts; i++) {
-      if(i == counts - 1&& *f == *l){
+      if (i == counts - 1 && *f == *l) {
         break;
       }
       m++;
@@ -329,11 +329,11 @@ void add(const char *number1, const char *number2, char *answer) {
       if (m >= counter) {
         fer -= 48;
       }
-      if (i == counts - 2 && fer != 0) {
+      if (i == counts - 1 && fer != 0) {
         char L = fer + 48;
         *answer_ptr = L;
       }
-      if (i != counts - 2) {
+      if (i != counts - 1) {
         char L = fer + 48;
         *answer_ptr = L;
         answer_ptr++;
@@ -359,7 +359,7 @@ void add(const char *number1, const char *number2, char *answer) {
       counter++;
     }
     for (int i = 0; i < counter; i++) {
-      if(i == counter - 1&& *f == *l){
+      if (i == counter - 1 && *f == *l) {
         break;
       }
       m++;
@@ -401,19 +401,21 @@ void add(const char *number1, const char *number2, char *answer) {
       }
       if (i == counter - 1 && fer != 0) {
         char L = fer + 48;
-        *answer = L;
+        *answer_ptr = L;
       }
       if (i != counter - 1) {
         char L = fer + 48;
-        *answer = L;
-        answer++;
+        *answer_ptr = L;
+        answer_ptr++;
       }
       f--;
       l--;
       D--;
     }
-    answer -= counter;
-    answer++;
+    while (*answer_ptr != 0) {
+      answer_ptr++;
+    }
+    *answer_ptr = '-';
     reverse(answer);
   }
   if (a == -1 && check == 0 && check2 == 2) {
@@ -427,7 +429,7 @@ void add(const char *number1, const char *number2, char *answer) {
     }
     counter--;
     for (int i = 0; i < counter; i++) {
-      if(i == counter - 1&& *f == *l){
+      if (i == counter - 1 && *f == *l) {
         break;
       }
       m++;
@@ -439,6 +441,7 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*f > *l) {
           D--;
+          count++;
           while (*D == '0') {
             D--;
             count++;
@@ -467,22 +470,23 @@ void add(const char *number1, const char *number2, char *answer) {
       if (m >= counts) {
         fer -= 48;
       }
-      if (i == counter - 2 && fer != 0) {
+      if (i == counter - 1 && fer != 0) {
         char L = fer + 48;
-        *answer = L;
+        *answer_ptr = L;
       }
-      if (i != counter - 2) {
+      if (i != counter - 1) {
         char L = fer + 48;
-        *answer = L;
-        answer++;
+        *answer_ptr = L;
+        answer_ptr++;
       }
       f--;
       l--;
       D--;
+      count = 0;
     }
-    *answer = '-';
-    answer -= counter;
-    answer += 2;
+    while (*answer_ptr != 0) {
+      answer_ptr++;
+    }
     reverse(answer);
   }
   if (a == 1 && check == 0 && check2 == 2) {
@@ -495,7 +499,7 @@ void add(const char *number1, const char *number2, char *answer) {
       counter++;
     }
     for (int i = 0; i < counts; i++) {
-      if(i == counts - 1&& *f == *l){
+      if (i == counts - 1 && *f == *l) {
         break;
       }
       m++;
@@ -507,6 +511,7 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*l > *f) {
           S--;
+          count++;
           while (*S == '0') {
             S--;
             count++;
@@ -537,19 +542,18 @@ void add(const char *number1, const char *number2, char *answer) {
       }
       if (i == counts - 1 && fer != 0) {
         char L = fer + 48;
-        *answer = L;
+        *answer_ptr = L;
       }
       if (i != counts - 1) {
         char L = fer + 48;
-        *answer = L;
+        *answer_ptr = L;
+        answer_ptr++;
       }
-      answer++;
       f--;
       l--;
       S--;
+      count = 0;
     }
-    answer -= counts;
-    answer += 1;
     reverse(answer);
   }
 }
@@ -577,7 +581,11 @@ int main() {
            "00000",
            "9999999999999999999999999999999999999999999999999999999999999999999"
            "9989");
-  test_add("-189989008889294820948018403284709849832408840000039428432048324289032849038408904839248039840284444444444444444092840984301", "-888420084928402480913402840938240990", "-9850809203902390123980298339840284039840928340283408902849337351971\
+  test_add(
+      "-18998900888929482094801840328470984983240884000003942843204832428903284"
+      "9038408904839248039840284444444444444444092840984301",
+      "-888420084928402480913402840938240990",
+      "-9850809203902390123980298339840284039840928340283408902849337351971\
 116344650961319131721990302332202293532926764943490821");
   test_add("1000", "1", "1001");
   test_add("9", "1", "10");
