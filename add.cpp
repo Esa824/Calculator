@@ -24,7 +24,6 @@ void reverse(char *result) {
   a--;
   for (int i = 0; i < count; i++) {
     *result = *a;
-
     a--;
     result++;
   }
@@ -32,14 +31,14 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  char A[128] = {0};
+  char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
   while (*S != 0) {
     S++;
   }
   S--;
-  char Q[128] = {0};
+  char Q[strlen(number2) + 1];
   strcpy(Q, number2);
   char *D = Q;
   while (*D != 0) {
@@ -240,21 +239,21 @@ void add(const char *number1, const char *number2, char *answer) {
     }
     counter--;
     counts--;
-    for (int i = 0; i < counter; i++) {
+    for (int i = 0; i < counts; i++) {
       m++;
       int fer = 0;
       if (found_two == 0) {
         fer = *f;
       }
       fer += caries;
-      if (m < counts) {
+      if (m < counter) {
         fer += *l;
         l--;
       }
       if (m >= counter) {
         fer -= 48;
       }
-      if (m < counts) {
+      if (m < counter) {
         fer -= 96;
       }
       int fere = fer;
@@ -265,7 +264,7 @@ void add(const char *number1, const char *number2, char *answer) {
       answer_ptr++;
       fere /= 10;
       caries = fere;
-      if (caries > 0 && i == counter - 1) {
+      if (caries > 0 && i == counts - 1) {
         found_two = 1;
         counter++;
       }
@@ -562,7 +561,8 @@ int main() {
            "00000",
            "9999999999999999999999999999999999999999999999999999999999999999999"
            "9989");
-  test_add("-11", "-90", "-101");
+  test_add("-189989008889294820948018403284709849832408840000039428432048324289032849038408904839248039840284444444444444444092840984301", "-888420084928402480913402840938240990", "-9850809203902390123980298339840284039840928340283408902849337351971\
+116344650961319131721990302332202293532926764943490821");
   test_add("1000", "1", "1001");
   test_add("9", "1", "10");
   test_add("-9", "-1", "-10");

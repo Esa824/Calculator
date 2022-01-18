@@ -78,14 +78,14 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  char A[128] = {0};
+  char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
   while (*S != 0) {
     S++;
   }
   S--;
-  char Q[128] = {0};
+  char Q[strlen(number2)];
   strcpy(Q, number2);
   char *D = Q;
   while (*D != 0) {
