@@ -31,14 +31,14 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  char A[strlen(number1) + 2];
+  char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
   while (*S != 0) {
     S++;
   }
   S--;
-  char Q[strlen(number2) + 2];
+  char Q[strlen(number2) + 1];
   strcpy(Q, number2);
   char *D = Q;
   while (*D != 0) {
@@ -588,5 +588,5 @@ int main() {
   test_add("1000", "1", "1001");
   test_add("9", "1", "10");
   test_add("-9", "-1", "-10");
-  test_add("48394082094834444444444444444444444830928403284092384023840293840238492384092384902384092","-2382093819381238012383u29183019283093801","");
+  test_add("48394082094834444444444444444444444830928403284092384023840293840238492384092384902384092","-238209381938123801238329183019283093801","48394082094834444444444444444444444830928403284092145814458355716437254054909365619290291");
 }
