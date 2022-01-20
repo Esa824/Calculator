@@ -1,11 +1,12 @@
+#include "add.h"
+#include "multiply.h"
+#include "reverse.h"
+#include "subtract.h"
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <iterator>
 #include <string>
-#include "subtract.h"
-#include "multiply.h"
-#include "add.h"
 using namespace std;
 // -1 if number1 is less than number2 1 if number1
 // greater number2
@@ -46,36 +47,12 @@ int compare(const char *number1, const char *number2) {
   }
   return 0;
 }
-void reverse(char *result) {
-  int count = 0;
-  char result2[128] = {0};
-  char *a = result2;
-  while (*result != 0) {
-    result++;
-    count++;
-  }
-  result -= count;
-  for (int i = 0; i < count; i++) {
-    *a = *result;
-    result++;
-    a++;
-  }
-  result -= count;
-  a--;
-  for (int i = 0; i < count; i++) {
-    *result = *a;
-
-    a--;
-    result++;
-  }
-  result -= count;
-}
 void divide(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-if(strlen(number1) > 128){
+  if (strlen(number1) > 128) {
     a = -2;
   }
-  if(strlen(number2) > 128){
+  if (strlen(number2) > 128) {
     a = -2;
   }
   int caries = 0;
