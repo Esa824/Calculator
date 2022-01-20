@@ -32,6 +32,12 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+  if(strlen(number1) > 128){
+    a = -2;
+  }
+  if(strlen(number2) > 128){
+    a = -2;
+  }
   char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
@@ -280,19 +286,13 @@ void add(const char *number1, const char *number2, char *answer) {
     reverse(answer);
   }
   if (a == 1 && check == 2 && check2 == 0) {
-    while (*b != 0) {
-      b++;
-      counts++;
-    }
     while (*d != 0) {
       d++;
       counter++;
     }
+    int counts = strlen(A);
     counts--;
     for (int i = 0; i < counts; i++) {
-      if (i == counts - 1 && *f == *l) {
-        break;
-      }
       m++;
       int fer = *f;
       if (m < counter) {
@@ -342,6 +342,7 @@ void add(const char *number1, const char *number2, char *answer) {
       f--;
       l--;
       S--;
+      count = 0;
     }
     char *u = answer;
     while (*u != 0) {
@@ -412,6 +413,7 @@ void add(const char *number1, const char *number2, char *answer) {
       f--;
       l--;
       D--;
+      count = 0;
     }
     reverse(answer);
   }
@@ -438,7 +440,6 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*f > *l) {
           D--;
-          count++;
           while (*D == '0') {
             D--;
             count++;
@@ -509,7 +510,6 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*l > *f) {
           S--;
-          count++;
           while (*S == '0') {
             S--;
             count++;
@@ -968,4 +968,6 @@ int main() {
       "-801885890402483094802483204823948394828492840938954939380912",
       "-9845174580188888454157857813045793820498304981363716695250592718921\
 5919644360955494060319587552329999043987");
+  test_subtract("-94294023944444809384092834981388012938091283981209182390182309183190381443324", "3829381038201383182312839128301823193813123081312390811130912831954939380912", "-9467696204826494770232411889421819525747259628934042147129540046638\
+5875381415");
 }

@@ -78,6 +78,12 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+  if(strlen(number1) > 128){
+    a = -2;
+  }
+  if(strlen(number2) > 128){
+    a = -2;
+  }
   char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
@@ -635,6 +641,12 @@ void subtract(const char *number1, const char *number2, char *answer) {
 }
 void divide(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+if(strlen(number1) > 128){
+    a = -2;
+  }
+  if(strlen(number2) > 128){
+    a = -2;
+  }
   int caries = 0;
   int found = 0;
   int check2 = 0;
