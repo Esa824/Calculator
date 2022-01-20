@@ -1,10 +1,10 @@
-
 #include "add.h"
 #include "divide.h"
 #include "multiply.h"
 #include "subtract.h"
 #include <cstring>
 #include <string>
+#include <cstdio>
 void test_add(const char *number1, const char *number2,
               const char *expected_answer) {
   char result[128] = {0};
