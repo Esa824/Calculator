@@ -32,10 +32,10 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  if(strlen(number1) > 128){
+  if (strlen(number1) > 128) {
     a = -2;
   }
-  if(strlen(number2) > 128){
+  if (strlen(number2) > 128) {
     a = -2;
   }
   char A[strlen(number1) + 1];
@@ -574,6 +574,7 @@ void subtract(const char *number1, const char *number2, char *answer) {
   int caries = 0;
   int pluser2 = 0;
   int found = 0;
+  int found_two = 0;
   int count = 0;
   int check2 = 0;
   int check = 0;
@@ -856,7 +857,10 @@ void subtract(const char *number1, const char *number2, char *answer) {
     counts -= 1;
     for (int i = 0; i < counts; i++) {
       m++;
-      int fer = *f - 48;
+      int fer = 0;
+      if (found_two == 0) {
+        fer = *f - 48;
+      }
       fer += caries;
       if (m < counter) {
         int ferr = *l - 48;
@@ -870,6 +874,10 @@ void subtract(const char *number1, const char *number2, char *answer) {
       *answer_ptr = q;
       answer_ptr++;
       f--;
+      if (caries > 0 && i == counts - 1) {
+        found_two = 1;
+        counts++;
+      }
     }
     *answer_ptr = '-';
     reverse(answer);
@@ -906,6 +914,7 @@ void subtract(const char *number1, const char *number2, char *answer) {
       }
       caries = fer;
       caries /= 10;
+      fer %= 10;
       char M = fer + 48;
       *answer_ptr = M;
       answer_ptr++;
@@ -968,6 +977,12 @@ int main() {
       "-801885890402483094802483204823948394828492840938954939380912",
       "-9845174580188888454157857813045793820498304981363716695250592718921\
 5919644360955494060319587552329999043987");
-  test_subtract("-94294023944444809384092834981388012938091283981209182390182309183190381443324", "3829381038201383182312839128301823193813123081312390811130912831954939380912", "-9467696204826494770232411889421819525747259628934042147129540046638\
-5875381415");
+  test_subtract(
+      "-94294023944444809384092834981388012938091283981209182390182309183190381"
+      "443324",
+      "382938103820138318231283912830182319381312308131239081113091283195493938"
+      "0912",
+      "-98123404982646192566405674109689836131904407062521573201313222015145320"
+      "824236");
+  test_subtract("98483249832483948209482039480234884903840928309","-484838438409384083248394884922489384444480224293092048309489038","484838438409384181731644717406437593926519704527976952150417347");
 }
