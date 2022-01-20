@@ -31,6 +31,12 @@ void reverse(char *result) {
 }
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+  if(strlen(number1) > 128){
+    a = -2;
+  }
+  if(strlen(number1) > 128){
+    a = -2;
+  }
   char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
@@ -279,19 +285,12 @@ void add(const char *number1, const char *number2, char *answer) {
     reverse(answer);
   }
   if (a == 1 && check == 2 && check2 == 0) {
-    while (*b != 0) {
-      b++;
-      counts++;
-    }
     while (*d != 0) {
       d++;
       counter++;
     }
-    counts--;
+    int counts = strlen(A);
     for (int i = 0; i < counts; i++) {
-      if (i == counts - 1 && *f == *l) {
-        break;
-      }
       m++;
       int fer = *f;
       if (m < counter) {
@@ -341,6 +340,7 @@ void add(const char *number1, const char *number2, char *answer) {
       f--;
       l--;
       S--;
+      count = 0;
     }
     char *u = answer;
     while (*u != 0) {
@@ -411,6 +411,7 @@ void add(const char *number1, const char *number2, char *answer) {
       f--;
       l--;
       D--;
+      count = 0;
     }
     reverse(answer);
   }
@@ -437,7 +438,6 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*f > *l) {
           D--;
-          count++;
           while (*D == '0') {
             D--;
             count++;
@@ -508,7 +508,6 @@ void add(const char *number1, const char *number2, char *answer) {
         }
         if (*l > *f) {
           S--;
-          count++;
           while (*S == '0') {
             S--;
             count++;
@@ -589,4 +588,7 @@ int main() {
   test_add("9", "1", "10");
   test_add("-9", "-1", "-10");
   test_add("48394082094834444444444444444444444830928403284092384023840293840238492384092384902384092","-238209381938123801238329183019283093801","48394082094834444444444444444444444830928403284092145814458355716437254054909365619290291");
+  test_add("9820398120398203810938102380192380918301004858337248394082094834444444444444444444444830928403284092384023840293840238492384092384902384092","-4898234098409834093840928409384092384093284093284903844444547359769828149089382903892839849249837482748379924377777248849384029384442384392840283498902493049324823480238409384209384093849038492488888888829048888888882034823048294823048234839483209488888880","");
+  test_add("-4839408209389283104834444444444444444444444830928403284092384023840293840238492384092384902384092","403940234902238209381938123801238329183019283093801","-4839408209389283104834444444444444444444444830524463049190145814458355716437254054909365619290291");
+  test_add("-10","2","-7");
 }
