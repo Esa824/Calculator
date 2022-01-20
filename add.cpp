@@ -1,4 +1,5 @@
 #include "compare.h"
+#include "reverse.h"
 #include <cstdio>
 #include <cstring>
 #include <iostream>
@@ -6,29 +7,6 @@
 using namespace std;
 // -1 if number1 is less than number2 1 if number1
 // greater number2
-void reverse(char *result) {
-  int count = 0;
-  char result2[128] = {0};
-  char *a = result2;
-  while (*result != 0) {
-    result++;
-    count++;
-  }
-  result -= count;
-  for (int i = 0; i < count; i++) {
-    *a = *result;
-    result++;
-    a++;
-  }
-  result -= count;
-  a--;
-  for (int i = 0; i < count; i++) {
-    *result = *a;
-    a--;
-    result++;
-  }
-  result -= count;
-}
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
   if(strlen(number1) > 128){
