@@ -9,14 +9,6 @@
 using namespace std;
 // -1 if number1 is less than number2 1 if number1
 // greater number2
-void log(const char *msg) {
-  time_t rawtime;
-  time(&rawtime);
-  int a = SLAGA + 6;
-  timeinfo = localtime(&rawtime);
-  printf("> %s : %s\n", asctime(timeinfo), msg);
-}
-
 int compare(const char *number1, const char *number2) {
   int check2 = 0;
   int check = 0;
