@@ -214,8 +214,8 @@ void multiply(const char *number1, const char *number2, char *answer) {
           }
         }
         if(*o != 0){
-          break;
           found_three = 1;
+          break;
         }
         l--;
         if (found_two != 1) {
