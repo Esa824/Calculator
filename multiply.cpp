@@ -8,6 +8,7 @@ void multiply(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
   int found_two = 0;
   int found_three = 0;
+  int found_four = 0;
   int count = 0;
   int spe = 0;
   int m = -1;
@@ -105,9 +106,9 @@ void multiply(const char *number1, const char *number2, char *answer) {
             V++;
             f_f++;
           }
-          char * L = O;
+          char *L = O;
           L += 127;
-          if(*L != 0){
+          if (*L != 0) {
             break;
             found_three = 1;
           }
@@ -120,8 +121,6 @@ void multiply(const char *number1, const char *number2, char *answer) {
               mm++;
             }
           }
-          V -= founds_count;
-          spe = founds_count;
           if (*m != 0) {
             char *q = answer;
             while (*q != 0) {
@@ -136,10 +135,10 @@ void multiply(const char *number1, const char *number2, char *answer) {
             reverse(P);
           }
           add(P, O, M);
-          char * MM = M;
+          char *MM = M;
           MM += 127;
-          if(*MM != 0){
-            found_three = 1;
+          if (*MM != 0) {
+            found_four = 1;
             break;
           }
           char *O_ptr = O;
@@ -161,16 +160,16 @@ void multiply(const char *number1, const char *number2, char *answer) {
               *answer_ptr = *M_ptr;
               answer_ptr++;
               M_ptr++;
-              if(*m != 0){
+              if (*m != 0) {
                 *m = 0;
-                char * q = answer;
-                while(*q != 0){
+                char *q = answer;
+                while (*q != 0) {
                   *q = 0;
                   q++;
                   found_three = 1;
                 }
               }
-              if(found_three == 1){
+              if (found_three == 1) {
                 break;
               }
             }
@@ -201,7 +200,9 @@ void multiply(const char *number1, const char *number2, char *answer) {
           *L = m;
           fere /= 10;
           cari = fere;
-          f--;
+          if (found_two == 0) {
+            f--;
+          }
           L++;
           fer = 0;
           if (cari > 0 && j == counts - 1) {
@@ -213,8 +214,8 @@ void multiply(const char *number1, const char *number2, char *answer) {
             f += counts;
           }
         }
-        if(*o != 0){
-          found_three = 1;
+        if (*o != 0) {
+          found_four = 1;
           break;
         }
         l--;
@@ -227,44 +228,13 @@ void multiply(const char *number1, const char *number2, char *answer) {
       }
     }
     if (check == 0 && check2 == 2 || check == 2 && check2 == 0) {
-     if(found_three == 0){
-      char *l = answer;
-      while (*l != 0) {
-        l++;
+      if (found_four == 0) {
+        char *l = answer;
+        while (*l != 0) {
+          l++;
+        }
+        *l = '-';
       }
-      *l = '-';
-    }
     }
   }
-}
-void test_multiply(const char *number1, const char *number2,
-                   const char *result2) {
-  char answer[128] = {0};
-  multiply(number1, number2, answer);
-  printf("number1 %s number2 %s result %s result2 %s(%s)\n", number1, number2,
-         answer, result2,
-         strcmp(answer, result2) == 0 ? "it is correct" : "it is wrong");
-}
-int main() {
-  test_multiply("383838", "2847", "1092786786");
-  test_multiply(
-      "-9909409312034203038383888888882018302130938018",
-      "-28479402934902044209",
-      "282214060644292528804232966701060943704665003735670569810874837762");
-  test_multiply(
-      "-9909409390482094023842012034203038383888888882018302130938018",
-      "-284794402984092380888889423409283002934902044209",
-      "2822144331287306739510102014496283311182695075663104947778181279528737310045493690797486366935369810874837762");
-  test_multiply(
-      "990940939048884839028884088888881389048039809432348220940238420120342030"
-      "38383888888882018302130938018",
-      "-28479444093284092834028304029840923808888894234092594805289083002934902"
-      "044209",
-      "0");
-  test_multiply(
-      "-99094093904888888888813890480398094323482209402384201203420303838388888"
-      "8882018302130938018",
-      "-2847944409328409283402830402984092380888889423409283002934902044209",
-      "0");
-
 }
