@@ -8,6 +8,12 @@
 using namespace std;
 void subtract(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+  if (strlen(number1) > 128) {
+    a = -2;
+  }
+  if (strlen(number2) > 128) {
+    a = -2;
+  }
   char A[strlen(number1) + 1];
   strcpy(A, number1);
   char *S = A;
@@ -397,7 +403,8 @@ void test_subtract(const char *number1, const char *number2,
          number1, result, number2, expected_answer,
          strcmp(result, expected_answer) == 0 ? "correct" : "wrong");
 }
-int main() {
+int main () {
+
   test_subtract("9429402394444443324", "954939380912", "9429401439505062412");
   test_subtract("-903213092139223092849021333309109429402394444443324",
                 "94901301239154939380912",

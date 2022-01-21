@@ -1,12 +1,16 @@
+#include "add.h"
+#include "compare.h"
+#include "reverse.h"
 #include <cstdio>
 #include <cstring>
 #include <string>
-#include "compare.h"
-#include "reverse.h"
-#include "add.h"
 void multiply(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
+  if (strlen(number1) > 128 || strlen(number2) > 128) {
+    a = -2;
+  }
   int found_two = 0;
+  int found_three = 0;
   int count = 0;
   int spe = 0;
   int m = -1;
@@ -71,6 +75,8 @@ void multiply(const char *number1, const char *number2, char *answer) {
     if (check2 == 2 && check == 0) {
       counts--;
     }
+    char *m = answer;
+    m += 127;
     int g = 0;
     char M[128] = {0};
     char P[128] = {0};
@@ -109,6 +115,14 @@ void multiply(const char *number1, const char *number2, char *answer) {
           }
           V -= founds_count;
           spe = founds_count;
+          if (*m != 0) {
+            char *q = answer;
+            while (*q != 0) {
+              *q = '0';
+              q++;
+            }
+            break;
+          }
         }
         if (i > 1) {
           if (i >= 3) {
@@ -134,6 +148,18 @@ void multiply(const char *number1, const char *number2, char *answer) {
               *answer_ptr = *M_ptr;
               answer_ptr++;
               M_ptr++;
+              if(*m != 0){
+                *m = 0;
+                char * q = answer;
+                while(*q != 0){
+                  *q = 0;
+                  q++;
+                  found_three = 1;
+                }
+              }
+              if(found_three == 1){
+                break;
+              }
             }
           }
         }
@@ -189,4 +215,39 @@ void multiply(const char *number1, const char *number2, char *answer) {
       *l = '-';
     }
   }
+  printf("%s\n", answer);
+}
+void test_multiply(const char *number1, const char *number2,
+                   const char *result2) {
+  char answer[128] = {0};
+  multiply(number1, number2, answer);
+  printf("number1 %s number2 %s result %s result2 %s(%s)\n", number1, number2,
+         answer, result2,
+         strcmp(answer, result2) == 0 ? "it is correct" : "it is wrong");
+}
+int main() {
+  test_multiply("383838", "2847", "1092786786");
+  test_multiply(
+      "-9909409312034203038383888888882018302130938018",
+      "-28479402934902044209",
+      "282214060644292528804232966701060943704665003735670569810874837762");
+  test_multiply(
+      "-9909409390482094023842012034203038383888888882018302130938018",
+      "-284794402984092380888889423409283002934902044209",
+      "28221443312873067395101020144962833111826950756631049477781812795287\
+37310045493690797486366935369810874837762");
+  test_multiply(
+      "-99094093904888888888813890480398094323482209402384201203420303838388888"
+      "8882018302130938018",
+      "-2847944409328409283402830402984092380888889423409283002934902044209",
+      "28221447073389270924587708601087999699522738449176166350657632859011\
+82573055364056904647403532010700271353735172176737310045493690797486\
+366935369810874837762");
+  test_multiply(
+      "990940939048884839028884088888881389048039809432348220940238420120342030"
+      "38383888888882018302130938018",
+      "-28479444093284092834028304029840923808888894234092594805289083002934902"
+      "044209",
+      "99094093904888483902888437368332232188896814971538851934947650900928\
+437130978694177965021237032982227");
 }
