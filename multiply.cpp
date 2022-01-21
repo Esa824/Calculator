@@ -6,9 +6,6 @@
 #include <string>
 void multiply(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  if (strlen(number1) > 128 || strlen(number2) > 128) {
-    a = -2;
-  }
   int found_two = 0;
   int found_three = 0;
   int count = 0;
@@ -42,6 +39,10 @@ void multiply(const char *number1, const char *number2, char *answer) {
       check2 = 1;
     }
     p++;
+  }
+  if (strlen(number1) > 128 || strlen(number2) > 128) {
+    check = 4;
+    check2 = 20;
   }
   const char *f = number1;
   const char *l = number2;
@@ -104,6 +105,12 @@ void multiply(const char *number1, const char *number2, char *answer) {
             V++;
             f_f++;
           }
+          char * L = O;
+          L += 127;
+          if(*L != 0){
+            break;
+            found_three = 1;
+          }
           if (i == counter + counter - 1) {
             char *v = O;
             char *mm = answer;
@@ -129,6 +136,12 @@ void multiply(const char *number1, const char *number2, char *answer) {
             reverse(P);
           }
           add(P, O, M);
+          char * MM = M;
+          MM += 127;
+          if(*MM != 0){
+            found_three = 1;
+            break;
+          }
           char *O_ptr = O;
           char *M_ptr = M;
           while (*M_ptr != 0) {
@@ -171,6 +184,8 @@ void multiply(const char *number1, const char *number2, char *answer) {
             L++;
           }
         }
+        char *o = P;
+        o += 127;
         for (int j = 0; j < counts; j++) {
           int fer = 0;
           int ferr = 0;
@@ -194,9 +209,13 @@ void multiply(const char *number1, const char *number2, char *answer) {
             found_two = 1;
           }
           if (found_two == 1 && j == counts - 1) {
-            f += counts;
             counts--;
+            f += counts;
           }
+        }
+        if(*o != 0){
+          break;
+          found_three = 1;
         }
         l--;
         if (found_two != 1) {
@@ -208,14 +227,15 @@ void multiply(const char *number1, const char *number2, char *answer) {
       }
     }
     if (check == 0 && check2 == 2 || check == 2 && check2 == 0) {
+     if(found_three == 0){
       char *l = answer;
       while (*l != 0) {
         l++;
       }
       *l = '-';
     }
+    }
   }
-  printf("%s\n", answer);
 }
 void test_multiply(const char *number1, const char *number2,
                    const char *result2) {
@@ -234,20 +254,17 @@ int main() {
   test_multiply(
       "-9909409390482094023842012034203038383888888882018302130938018",
       "-284794402984092380888889423409283002934902044209",
-      "28221443312873067395101020144962833111826950756631049477781812795287\
-37310045493690797486366935369810874837762");
-  test_multiply(
-      "-99094093904888888888813890480398094323482209402384201203420303838388888"
-      "8882018302130938018",
-      "-2847944409328409283402830402984092380888889423409283002934902044209",
-      "28221447073389270924587708601087999699522738449176166350657632859011\
-82573055364056904647403532010700271353735172176737310045493690797486\
-366935369810874837762");
+      "2822144331287306739510102014496283311182695075663104947778181279528737310045493690797486366935369810874837762");
   test_multiply(
       "990940939048884839028884088888881389048039809432348220940238420120342030"
       "38383888888882018302130938018",
       "-28479444093284092834028304029840923808888894234092594805289083002934902"
       "044209",
-      "99094093904888483902888437368332232188896814971538851934947650900928\
-437130978694177965021237032982227");
+      "0");
+  test_multiply(
+      "-99094093904888888888813890480398094323482209402384201203420303838388888"
+      "8882018302130938018",
+      "-2847944409328409283402830402984092380888889423409283002934902044209",
+      "0");
+
 }
