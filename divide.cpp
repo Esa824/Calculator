@@ -13,14 +13,15 @@ using namespace std;
 // greater number2
 void divide(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  if (strlen(number1) > 128) {
+  if (strlen(number1) > 128 || strlen(number1) == 0 || strlen(number2) == 0) {
     a = -2;
   }
-  if (strlen(number2) > 128) {
+  if (strlen(number2) > 128 || strlen(number1) == 0 || strlen(number2) == 0) {
     a = -2;
   }
   int caries = 0;
   int found = 0;
+  int found_two = 0;
   int check2 = 0;
   int check = 0;
   int counts = 0;
@@ -55,6 +56,8 @@ void divide(const char *number1, const char *number2, char *answer) {
   const char *l = number2;
   char x[128] = {0};
   char *x_ptr = x;
+  char * GG = answer;
+  GG += 127;
   char *answer_ptr = answer;
   counter = strlen(number1);
   counts = strlen(number2);
@@ -70,6 +73,14 @@ void divide(const char *number1, const char *number2, char *answer) {
       number2_ptr++;
     }
     for (;;) {
+      if(*GG != 0){
+        char *gg = answer;
+        while(*gg != 0){
+          *gg = 0;
+          gg++;
+        }
+        break;
+      }
       result_compare = compare(x, number2);
       if (result_compare == -1 && found == 0) {
         found = 1;
@@ -182,6 +193,14 @@ void divide(const char *number1, const char *number2, char *answer) {
     }
     f++;
     for (;;) {
+      if(*GG != 0){
+        char *gg = answer;
+        while(*gg != 0){
+          *gg = 0;
+          gg++;
+        }
+        break;
+      }
       result_compare = compare(x, number2_copy_copy);
       if (result_compare == -1 && found == 0) {
         found = 1;
@@ -279,6 +298,15 @@ void divide(const char *number1, const char *number2, char *answer) {
     }
     f++;
     for (;;) {
+      if(*GG != 0){
+        char *gg = answer;
+        while(*gg != 0){
+          *gg = 0;
+          gg++;
+        }
+        found_two = 1;
+        break;
+      }
       result_compare = compare(x, number2);
       if (result_compare == -1 && found == 0) {
         found = 1;
@@ -370,7 +398,9 @@ void divide(const char *number1, const char *number2, char *answer) {
     while (*answer_ptr != 0) {
       answer_ptr++;
     }
+    if(found_two == 0){
     *answer_ptr = '-';
+    }
     reverse(answer);
   }
   if (a == 1 && check == 0 && check2 == 2) {
@@ -394,6 +424,15 @@ void divide(const char *number1, const char *number2, char *answer) {
       number2_r_ptr++;
     }
     for (;;) {
+      if(*GG != 0){
+        char *gg = answer;
+        while(*gg != 0){
+          *gg = 0;
+          gg++;
+        }
+        found_two = 1;
+        break;
+      }
       result_compare = compare(x, number2_copy_copy);
       if (result_compare == -1 && found == 0) {
         found = 1;
@@ -480,7 +519,9 @@ void divide(const char *number1, const char *number2, char *answer) {
     while (*answer_ptr != 0) {
       answer_ptr++;
     }
+    if(found_two == 0){
     *answer_ptr = '-';
+    }
     reverse(answer);
   }
 }

@@ -41,7 +41,7 @@ void multiply(const char *number1, const char *number2, char *answer) {
     }
     p++;
   }
-  if (strlen(number1) > 128 || strlen(number2) > 128) {
+  if (strlen(number1) > 128 || strlen(number2) > 128 || strlen(number1) == 0 || strlen(number2) == 0) {
     check = 4;
     check2 = 20;
   }

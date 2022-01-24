@@ -9,10 +9,8 @@ using namespace std;
 // greater number2
 void add(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  if(strlen(number1) > 128){
-    a = -2;
-  }
-  if(strlen(number2) > 128){
+  if (strlen(number1) > 128 || strlen(number2) > 128 ||
+      strlen(number1) == 0 && strlen(number2) == 0) {
     a = -2;
   }
   char A[strlen(number1) + 1];
@@ -66,6 +64,8 @@ void add(const char *number1, const char *number2, char *answer) {
   const char *f = A;
   const char *d = Q;
   const char *l = Q;
+  char *s = answer;
+  s += 127;
   while (*f != 0) {
     f++;
   }
@@ -75,6 +75,93 @@ void add(const char *number1, const char *number2, char *answer) {
   int number = 10;
   f--;
   l--;
+  if (a == 0 && check == 0 && check2 == 2) {
+    while (*b != 0) {
+      b++;
+      counts++;
+    }
+    while (*d != 0) {
+      d++;
+      counter++;
+    }
+    for (int i = 0; i < counts - 1; i++) {
+      m++;
+      int fer = 0;
+      fer += caries;
+      if (found_two == 0) {
+        fer += *f - 48;
+        fer += *l - 48;
+      }
+      caries = fer;
+      fer %= 10;
+      caries /= 10;
+      char t = fer + 48;
+      *answer_ptr = t;
+      f--;
+      l--;
+      answer_ptr++;
+      if (caries > 0 && i == counts - 1) {
+        found_two = 1;
+        counts++;
+      }
+    }
+    if (*s != 0) {
+      *s = '0';
+    }
+    char *d = answer;
+    while (*d != 0) {
+      d++;
+    }
+    reverse(answer);
+  }
+  if (a == 0 && check == 2 && check2 == 2) {
+    while (*b != 0) {
+      b++;
+      counts++;
+    }
+    while (*d != 0) {
+      d++;
+      counter++;
+    }
+    counts--;
+    for (int i = 0; i < counts; i++) {
+      m++;
+      int fer = 0;
+      fer += caries;
+      if (found_two == 0) {
+        fer += *f - 48;
+        fer += *l - 48;
+      }
+      caries = fer;
+      fer %= 10;
+      caries /= 10;
+      char t = fer + 48;
+      *answer_ptr = t;
+      f--;
+      l--;
+      answer_ptr++;
+      if (caries > 0 && i == counts - 1) {
+        found_two = 1;
+        counts++;
+      }
+    }
+    while (*answer_ptr != 0) {
+      answer_ptr++;
+    }
+    *answer_ptr = '-';
+    if (*s != 0) {
+      *s = '0';
+    }
+    char *d = answer;
+    while (*d != 0) {
+      d++;
+    }
+    reverse(answer);
+  }
+
+  if (a == 0 && check == 2 && check2 == 0) {
+    *answer_ptr = '0';
+  }
   if (a == 1 && check == 0 && check2 == 0) {
     while (*b != 0) {
       b++;
@@ -91,9 +178,11 @@ void add(const char *number1, const char *number2, char *answer) {
         fer = *f;
       }
       fer += caries;
-      if (m < counter) {
-        fer += *l;
-        l--;
+      if (found_two == 0) {
+        if (m < counter) {
+          fer += *l;
+          l--;
+        }
       }
       if (found_two == 0) {
         if (m >= counter) {
@@ -115,6 +204,45 @@ void add(const char *number1, const char *number2, char *answer) {
         found_two = 1;
         counts++;
       }
+    }
+    reverse(answer);
+  }
+  if (a == 0 && check == 0 && check2 == 0) {
+    while (*b != 0) {
+      b++;
+      counts++;
+    }
+    while (*d != 0) {
+      d++;
+      counter++;
+    }
+    for (int i = 0; i < counts; i++) {
+      m++;
+      int fer = 0;
+      fer += caries;
+      if (found_two == 0) {
+        fer += *f - 48;
+        fer += *l - 48;
+      }
+      caries = fer;
+      fer %= 10;
+      caries /= 10;
+      char t = fer + 48;
+      *answer_ptr = t;
+      f--;
+      l--;
+      answer_ptr++;
+      if (caries > 0 && i == counts - 1) {
+        found_two = 1;
+        counts++;
+      }
+    }
+    if (*s != 0) {
+      *s = '0';
+    }
+    char *d = answer;
+    while (*d != 0) {
+      d++;
     }
     reverse(answer);
   }

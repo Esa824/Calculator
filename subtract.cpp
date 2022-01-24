@@ -8,10 +8,8 @@
 using namespace std;
 void subtract(const char *number1, const char *number2, char *answer) {
   int a = compare(number1, number2);
-  if (strlen(number1) > 128) {
-    a = -2;
-  }
-  if (strlen(number2) > 128) {
+  if (strlen(number1) > 128 || strlen(number2) > 128 ||
+      strlen(number1) == 0 && strlen(number2) == 0) {
     a = -2;
   }
   char A[strlen(number1) + 1];
@@ -74,6 +72,39 @@ void subtract(const char *number1, const char *number2, char *answer) {
   l--;
   counts = strlen(number1);
   counter = strlen(number2);
+  if (a == 0 && check == 0 && check2 == 0) {
+    *answer_ptr = '0';
+  }
+  if (a == 0 && check == 2 && check2 == 2) {
+    *answer_ptr = '0';
+  }
+  if (a == 0 && check == 0 && check2 == 2) {
+    char number2_copy[128] = {0};
+    strcpy(number2_copy, number2);
+    reverse(number2_copy);
+    char *f = number2_copy;
+    while (*f != 0) {
+      f++;
+    }
+    f--;
+    *f = 0;
+    reverse(number2_copy);
+    add(number1, number2_copy, answer);
+  }
+  if (a == 0 && check == 2 && check2 == 0) {
+    char number2_copy[128] = {0};
+    strcpy(number2_copy, number2);
+    char number1_copy[128] = {0};
+    strcpy(number1_copy, number1);
+    reverse(number1_copy);
+    char *f = number1_copy;
+    while (*f != 0) {
+      f++;
+    }
+    *f = '-';
+    reverse(number1_copy);
+    add(number1_copy, number2_copy, answer);
+  }
   if (a == 1 && check == 0 && check2 == 0 ||
       a == -1 && check == 0 && check2 == 0) {
     int found = 1;
