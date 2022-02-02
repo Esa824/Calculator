@@ -1,6 +1,6 @@
 #include <cstdio>
-#include "compare.h"
 #include <cstring>
+#include "compare.h"
 #include <iostream>
 #include <iterator>
 #include <string>

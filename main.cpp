@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include "compare.h"
 using namespace std;
 int main() {
   for(;;){
